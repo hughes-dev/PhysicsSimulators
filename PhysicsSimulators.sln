@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackHole", "BlackHole\BlackHole.csproj", "{B2B2953D-CBCD-46A5-8E63-619D25D29871}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B2B2953D-CBCD-46A5-8E63-619D25D29871}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2B2953D-CBCD-46A5-8E63-619D25D29871}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2B2953D-CBCD-46A5-8E63-619D25D29871}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2B2953D-CBCD-46A5-8E63-619D25D29871}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {89FC34EF-27CF-4BEF-B0DF-31F9F7CA23A4}
+	EndGlobalSection
+EndGlobal
