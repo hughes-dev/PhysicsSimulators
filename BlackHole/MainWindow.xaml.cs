@@ -145,22 +145,35 @@ namespace BlackHole
 
         private void GameLoop(object sender, EventArgs e)
         {
-            UpdateBlackHoleMass();
+            UpdateSpaceObjectsMass();
             UpdateSpaceObjectPositions();
             MoveSpaceObjects();
         }
 
-        private void UpdateBlackHoleMass()
+        private void UpdateSpaceObjectsMass()
         {
-            var blackHole = spaceObjects[0];
-
-            for (int i = spaceObjects.Count - 1; i > 0; i--) // Counting backwards to remove items safely
+            for (int i = 0; i < spaceObjects.Count; i++)
             {
-                if (SpaceMath.Distance(blackHole.Position, spaceObjects[i].Position) <= blackHole.Size / 2)
+                for (int j = i + 1; j < spaceObjects.Count; j++)
                 {
-                    blackHole.Mass += spaceObjects[i].Mass;
-                    RemoveSpaceObjectFromCanvas(spaceObjects[i].Id);
-                    spaceObjects.RemoveAt(i);
+                    if (i != j && SpaceMath.Distance(spaceObjects[i].Position, spaceObjects[j].Position) <= spaceObjects[i].Size / 2)
+                    {
+                        if (spaceObjects[i].Mass > spaceObjects[j].Mass)
+                        {
+                            spaceObjects[i].Mass += spaceObjects[j].Mass;
+                            RemoveSpaceObjectFromCanvas(spaceObjects[j].Id);
+                            spaceObjects.RemoveAt(j);
+                            j--;  // adjust the index after removal
+                        }
+                        else
+                        {
+                            spaceObjects[j].Mass += spaceObjects[i].Mass;
+                            RemoveSpaceObjectFromCanvas(spaceObjects[i].Id);
+                            spaceObjects.RemoveAt(i);
+                            i--;  // adjust the index after removal
+                            break;  // exit the inner loop as the current object i has been removed
+                        }
+                    }
                 }
             }
         }
@@ -209,12 +222,14 @@ namespace BlackHole
 
             for (int i = 0; i < spaceObjects.Count; i++)
             {
-                for (int j = 0; j < spaceObjects.Count; j++)
+                for (int j = i + 1; j < spaceObjects.Count; j++)
                 {
                     if (i != j)
                     {
-                        var acceleration = SpaceMath.CalculateAcceleration(spaceObjects[i], spaceObjects[j], GravitationalConstant);
-                        spaceObjects[i].Acceleration += acceleration;
+                        var acceleration1 = SpaceMath.CalculateAcceleration(spaceObjects[i], spaceObjects[j], GravitationalConstant);
+                        var acceleration2 = SpaceMath.CalculateAcceleration(spaceObjects[j], spaceObjects[i], GravitationalConstant);
+                        spaceObjects[i].Acceleration += acceleration1;
+                        spaceObjects[j].Acceleration += acceleration2;
                     }
                 }
             }
